@@ -16,5 +16,5 @@ public class ProductResponseDTO
     private LocalDate releaseDate;
     private Boolean productAvailable;
     private Integer stockQuantity;
-    private String imageUrl;
+    private byte[] imageData;
 }

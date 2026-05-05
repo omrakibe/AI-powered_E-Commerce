@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: server
+  ai:
+    openai:
+      api-key: { openApi-key }
+      base-url: https://api.groq.com/openai/v1
+      chat:
+        options:
+          model: { model }
+
+  datasource:
+    url: { url }
+    username: { db username }
+    password: { db password }

@@ -28,7 +28,7 @@ public class GlobalExceptionHandler
 
         ErrorDetails error = new ErrorDetails(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Something went wrong",
+                ex.getMessage(),
                 LocalDateTime.now()
         );
 

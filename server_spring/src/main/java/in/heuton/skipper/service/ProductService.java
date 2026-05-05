@@ -38,24 +38,27 @@ public class ProductService implements IProductService
                     ProductResponseDTO dto =
                             modelMapper.map(product, ProductResponseDTO.class);
 
-                    dto.setImageUrl("http://localhost:8080/products/"
-                            + product.getId() + "/image");
-
                     return dto;
                 })
                 .toList();
     }
 
     @Override
-    public ProductResponseDTO getProduct(Long id)
+    public ProductResponseDTO getProductById(Long id)
     {
         Product product = prodRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
 
         ProductResponseDTO response = modelMapper.map(product, ProductResponseDTO.class);
 
-        response.setImageUrl("http://localhost:8080/products/"
-                + product.getId() + "/image");
-
         return response;
+    }
+
+    @Override
+    public Product getProductEntity(Long id)
+    {
+
+        return prodRepo.findById(id)
+                .orElseThrow(() ->
+                        new ProductNotFoundException("Product not found with id: " + id));
     }
 }
