@@ -13,31 +13,35 @@ const Product = () => {
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(
-          `${baseUrl}/api/product/${id}`
-        );
-        setProduct(response.data);
-        console.log(response.data);
-        if (response.data.imageName) {
-          fetchImage();
-        }
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      }
-    };
+ useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/product/${id}`
+      );
+      setProduct(response.data);
 
-    const fetchImage = async () => {
+      fetchImage(); // always call
+
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
+  };
+
+  const fetchImage = async () => {
+    try {
       const response = await axios.get(
         `${baseUrl}/api/product/${id}/image`,
         { responseType: "blob" }
       );
       setImageUrl(URL.createObjectURL(response.data));
-    };
-    fetchProduct();
-  }, [id]);
+    } catch (err) {
+      console.log("Image not found");
+    }
+  };
+
+  fetchProduct();
+}, [id]);
 
   const deleteProduct = async () => {
     try {

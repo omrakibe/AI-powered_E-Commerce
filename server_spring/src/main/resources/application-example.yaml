@@ -13,3 +13,4 @@ spring:
     url: { url }
     username: { db username }
     password: { db password }
+

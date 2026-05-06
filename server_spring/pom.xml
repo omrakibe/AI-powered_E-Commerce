@@ -89,6 +89,10 @@
             <artifactId>modelmapper</artifactId>
             <version>3.2.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-ollama</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
