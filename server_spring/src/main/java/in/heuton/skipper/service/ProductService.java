@@ -105,17 +105,19 @@ public class ProductService implements IProductService
     }
 
     @Override
-    public String generateDescription(String name, String category)
+    public String generateDescription(String name, String category, String brand)
     {
         String templ = """
-                I want description for adding product in portal for product {name} and  category {category}.
+                Act like your AI assistant who is generating description while adding product.
+                Description for adding product in portal for product {name} of {brand} and  category {category}.
                 Give good, professional and simple description that even non-educated person could understand it that means customer friendly.
                 include the features and benefits of product.
                 Description should be in one para within 3-4 lines and don't mention in response that which category its related.
+                Don't mention any of the above line in response.
                 """;
 //        System.out.println(templ);
         PromptTemplate promptTemplate = new PromptTemplate(templ);
-        Prompt prompt = promptTemplate.create(Map.of("name", name, "category", category));
+        Prompt prompt = promptTemplate.create(Map.of("name", name, "category", category, "brand", brand));
 //        System.out.println(prompt);
         return chatClient.prompt(prompt)
                 .call()

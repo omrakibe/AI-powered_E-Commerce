@@ -17,7 +17,7 @@ public interface IProductService
 
     public ProductResponseDTO addProduct(ProductRequestDTO dto, MultipartFile file);
 
-    String generateDescription(String name, String category);
+    String generateDescription(String name, String category, String brand);
 
     ProductResponseDTO updateProduct(Long id, ProductRequestDTO product, MultipartFile imageFile);
 

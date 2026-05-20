@@ -49,15 +49,15 @@ public class ProductController
     @PostMapping("/product")
     public ResponseEntity<ProductResponseDTO> addProduct(@RequestPart ProductRequestDTO product, @RequestPart MultipartFile imageFile)
     {
-        System.out.println(product);
+//        System.out.println(product);
         ProductResponseDTO prod = service.addProduct(product, imageFile);
         return ResponseEntity.status(HttpStatus.CREATED).body(prod);
     }
 
     @PostMapping("/product/generate-description")
-    public ResponseEntity<String> generateDescription(@RequestParam String name, @RequestParam String category)
+    public ResponseEntity<String> generateDescription(@RequestParam String name, @RequestParam String category, @RequestParam String brand)
     {
-        String resp = service.generateDescription(name, category);
+        String resp = service.generateDescription(name, category, brand);
         return ResponseEntity.ok(resp);
     }
 
