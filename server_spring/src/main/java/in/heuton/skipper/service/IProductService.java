@@ -20,4 +20,6 @@ public interface IProductService
     String generateDescription(String name, String category);
 
     ProductResponseDTO updateProduct(Long id, ProductRequestDTO product, MultipartFile imageFile);
+
+    void deleteProduct(Long prodId);
 }

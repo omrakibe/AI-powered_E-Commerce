@@ -144,4 +144,12 @@ public class ProductService implements IProductService
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    @Override
+    public void deleteProduct(Long id)
+    {
+        Product existingProduct = prodRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
+
+        prodRepo.deleteById(existingProduct.getId());
+    }
 }

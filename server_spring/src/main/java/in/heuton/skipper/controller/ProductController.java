@@ -66,4 +66,11 @@ public class ProductController
     {
         return ResponseEntity.ok(service.updateProduct(id, product, imageFile));
     }
+
+    @DeleteMapping("/product/{prodId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long prodId)
+    {
+        service.deleteProduct(prodId);
+        return ResponseEntity.ok("Deleted");
+    }
 }
