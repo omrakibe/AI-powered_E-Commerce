@@ -60,4 +60,10 @@ public class ProductController
         String resp = service.generateDescription(name, category);
         return ResponseEntity.ok(resp);
     }
+
+    @PutMapping("/product/{id}")
+    public ResponseEntity<ProductResponseDTO> updateProduct(@RequestPart ProductRequestDTO product, @RequestPart MultipartFile imageFile, @PathVariable Long id)
+    {
+        return ResponseEntity.ok(service.updateProduct(id, product, imageFile));
+    }
 }

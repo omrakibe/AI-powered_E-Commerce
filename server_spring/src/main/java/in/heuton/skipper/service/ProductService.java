@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProductService implements IProductService
@@ -119,5 +120,28 @@ public class ProductService implements IProductService
         return chatClient.prompt(prompt)
                 .call()
                 .content();
+    }
+
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO dto, MultipartFile image)
+    {
+        Product existingProduct = prodRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
+
+        try
+        {
+            modelMapper.map(dto, existingProduct);
+            if (image != null && !image.isEmpty())
+            {
+                existingProduct.setImageName(image.getOriginalFilename());
+                existingProduct.setImageType(image.getContentType());
+                existingProduct.setImageData(image.getBytes());
+            }
+
+            prodRepo.save(existingProduct);
+
+            return modelMapper.map(existingProduct, ProductResponseDTO.class);
+        } catch (Exception ex)
+        {
+            throw new RuntimeException(ex.getMessage());
+        }
     }
 }

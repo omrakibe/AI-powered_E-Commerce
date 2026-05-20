@@ -18,4 +18,6 @@ public interface IProductService
     public ProductResponseDTO addProduct(ProductRequestDTO dto, MultipartFile file);
 
     String generateDescription(String name, String category);
+
+    ProductResponseDTO updateProduct(Long id, ProductRequestDTO product, MultipartFile imageFile);
 }
