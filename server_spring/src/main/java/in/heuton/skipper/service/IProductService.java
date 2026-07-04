@@ -1,7 +1,7 @@
 package in.heuton.skipper.service;
 
-import in.heuton.skipper.dto.ProductRequestDTO;
-import in.heuton.skipper.dto.ProductResponseDTO;
+import in.heuton.skipper.entity.dto.ProductRequestDTO;
+import in.heuton.skipper.entity.dto.ProductResponseDTO;
 import in.heuton.skipper.entity.Product;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,4 +1,4 @@
-package in.heuton.skipper.dto;
+package in.heuton.skipper.entity.dto;
 
 import lombok.Data;
 

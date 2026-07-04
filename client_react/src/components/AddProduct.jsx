@@ -138,7 +138,8 @@ const AddProduct = () => {
         {
           params: {
             name: product.name,
-            category: product.category
+            category: product.category,
+            brand: product.brand 
           }
         }
       );

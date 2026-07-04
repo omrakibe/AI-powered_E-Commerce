@@ -1,7 +1,7 @@
 package in.heuton.skipper.service;
 
-import in.heuton.skipper.dto.ProductRequestDTO;
-import in.heuton.skipper.dto.ProductResponseDTO;
+import in.heuton.skipper.entity.dto.ProductRequestDTO;
+import in.heuton.skipper.entity.dto.ProductResponseDTO;
 import in.heuton.skipper.entity.Product;
 import in.heuton.skipper.exception.ProductNotFoundException;
 import in.heuton.skipper.repository.IProductRepository;
@@ -16,10 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class ProductService implements IProductService
