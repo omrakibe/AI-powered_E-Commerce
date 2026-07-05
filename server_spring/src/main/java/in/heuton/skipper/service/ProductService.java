@@ -12,12 +12,16 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class ProductService implements IProductService
@@ -25,6 +29,9 @@ public class ProductService implements IProductService
     private IProductRepository prodRepo;
     private ModelMapper modelMapper;
     private ChatClient chatClient;
+
+    @Autowired
+    private VectorStore vectorStore;
 
     ChatMemory chatMemory = MessageWindowChatMemory.builder().build();
 
@@ -92,7 +99,33 @@ public class ProductService implements IProductService
                 product.setImageData(image.getBytes());
             }
 
-            prodRepo.save(product);
+            Product savedProd = prodRepo.save(product);
+
+            String content = String.format(
+                    """
+                                Product Name: %s
+                                Description: %s
+                                Brand: %s
+                                Category: %s
+                                Price: %.2f
+                                Release Date: %s
+                                Available: %s
+                                Stock: %d
+                            """, savedProd.getName(),
+                    savedProd.getDescription(),
+                    savedProd.getBrand(),
+                    savedProd.getCategory(),
+                    savedProd.getPrice(),
+                    savedProd.getReleaseDate(),
+                    savedProd.getProductAvailable(),
+                    savedProd.getStockQuantity()
+            );
+            Document doc = new Document(
+                    UUID.randomUUID().toString(),
+                    content,
+                    Map.of("productId", String.valueOf(savedProd.getId()))
+            );
+            vectorStore.add(List.of(doc));
 
             ProductResponseDTO response = modelMapper.map(product, ProductResponseDTO.class);
             return response;
@@ -136,8 +169,33 @@ public class ProductService implements IProductService
                 existingProduct.setImageData(image.getBytes());
             }
 
-            prodRepo.save(existingProduct);
-
+            Product savedProd = prodRepo.save(existingProduct);
+            String content = String.format(
+                    """
+                                Product Name: %s
+                                Description: %s
+                                Brand: %s
+                                Category: %s
+                                Price: %.2f
+                                Release Date: %s
+                                Available: %s
+                                Stock: %d
+                            """, savedProd.getName(),
+                    savedProd.getDescription(),
+                    savedProd.getBrand(),
+                    savedProd.getCategory(),
+                    savedProd.getPrice(),
+                    savedProd.getReleaseDate(),
+                    savedProd.getProductAvailable(),
+                    savedProd.getStockQuantity()
+            );
+            Document doc = new Document(
+                    UUID.randomUUID().toString(),
+                    content,
+                    Map.of("productId", String.valueOf(savedProd.getId()))
+            );
+            vectorStore.add(List.of(doc));
+            
             return modelMapper.map(existingProduct, ProductResponseDTO.class);
         } catch (Exception ex)
         {
