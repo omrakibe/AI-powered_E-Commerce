@@ -46,10 +46,10 @@ public class ProductService implements IProductService
     {
         List<Product> products = prodRepo.findAll();
 
-        if (products.isEmpty())
-        {
-            throw new ProductNotFoundException("No products found");
-        }
+//        if (products.isEmpty())
+//        {
+//            throw new ProductNotFoundException("No products found");
+//        }
 
         return products.stream()
                 .map(product ->

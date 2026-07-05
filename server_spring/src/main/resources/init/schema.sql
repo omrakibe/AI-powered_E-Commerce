@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS vector_store (
                                             id TEXT PRIMARY KEY, -- id should be TEXT (not UUID type)
                                             content TEXT,
                                             metadata JSONB,
-                                            embedding VECTOR(1536)
+                                            embedding VECTOR(768)
     );
 
 -- Create HNSW index for fast search

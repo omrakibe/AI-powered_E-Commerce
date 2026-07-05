@@ -1,7 +1,7 @@
 package in.heuton.skipper.entity.dto;
 
 public record OrderItemRequest(
-        int productId,
+        long productId,
         int quantity
 )
 {
