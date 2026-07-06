@@ -195,7 +195,7 @@ public class ProductService implements IProductService
                     Map.of("productId", String.valueOf(savedProd.getId()))
             );
             vectorStore.add(List.of(doc));
-            
+
             return modelMapper.map(existingProduct, ProductResponseDTO.class);
         } catch (Exception ex)
         {
@@ -207,7 +207,6 @@ public class ProductService implements IProductService
     public void deleteProduct(Long id)
     {
         Product existingProduct = prodRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
-
         prodRepo.deleteById(existingProduct.getId());
     }
 }
