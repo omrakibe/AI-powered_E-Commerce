@@ -69,14 +69,16 @@ public class ChatBotService
                 SearchRequest.builder()
                         .query(query)
                         .topK(5)                       // get top 5 most similar documents
-                        .similarityThreshold(0.7f)     // filter documents with similarity score below threshold
+//                        .similarityThreshold(0.7f)     // filter documents with similarity score below threshold
                         .build()
         );
 
         // Build a combined context string from document contents
         StringBuilder contextBuilder = new StringBuilder();
+//        System.out.println("Documents found: " + documents.size());
         for (Document doc : documents)
         {
+//            System.out.println(doc.getFormattedContent());
             contextBuilder.append(doc.getFormattedContent()).append("\n");
         }
 

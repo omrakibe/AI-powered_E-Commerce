@@ -18,6 +18,7 @@ Use the context provided below to answer the user's question:
 User's Query: {userQuery}
 
 Response Instructions:
+- Do not mention any credential data of product such as product id, stock quantity
 - Format all responses cleanly and professionally.
 - Do not use any formatting symbols (such as asterisks *, underscores _, or HTML tags like <b>).
 - Use plain text only.
