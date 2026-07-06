@@ -1,6 +1,10 @@
 spring:
   application:
     name: server
+
+  main:
+    allow-bean-definition-overriding: true
+
   ai:
     openai:
       api-key: { openApi-key }
@@ -14,3 +18,11 @@ spring:
     username: { db username }
     password: { db password }
 
+  sql:
+    init:
+      schema-locations: classpath:init/schema.sql
+      mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: update
